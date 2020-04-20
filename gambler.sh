@@ -1,24 +1,38 @@
 #!/bin/bash -x
-stake=100;
+numberOfDays=20;
+stake=0;
+everyDayStake=100;
 bet=1;
 gamblerWin=1;
 gamblerLose=0;
+declare -A winForTheDay;
+declare -A loseForTheDay;
+iteration1=0;
+iteration2=0;
 
-winingStake=$(($stake+($stake/2)));
-loseingStake=$(($stake-($stake/2)));
-
-while [ true ]
+for(( iteration=1; iteration<=numberOfDays; iteration++ ))
 do
-	if (( $stake==$winingStake || $stake==$loseingStake ))
-	then
-		break;
-	fi
-	result=$((RANDOM%2));
-	if (( $result == $gamblerWin ))
-	then
-		stake=$(($stake+$bet));
-	else
-		stake=$(($stake-$bet));
-	fi
+   stake=$(($stake+$everyDayStake));
+   winingStake=$(($stake+($stake/2)));
+   loseingStake=$(($stake-($stake/2)));
+   while [ true ]
+   do
+      if (( $todaysStake==$winingStake || $todaysStake==$loseingStake ))
+      then
+         break;
+      fi
+
+      playBet=$((RANDOM%2));
+
+      if (( $playBet == $gamblerWin ))
+      then
+         todaysStake=$(($todaysStake+$bet));
+      else
+         todaysStake=$(($todaysStake-$bet));
+      fi
+   done
+
+
+   stake=$todaysStake;
 done
-#echo "Gambler Stake : " $stake;
+echo "Total amount after 20 days are: " $stake;
