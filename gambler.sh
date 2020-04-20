@@ -32,7 +32,24 @@ do
       fi
    done
 
+   if (( $stake < $todaysStake ))
+   then
+      winForTheDay[Day-"$iteration"]=$(($todaysStake-$stake));
+   else
+      loseForTheDay[Day-"$iteration"]=$(($stake-$todaysStake));
+   fi
 
    stake=$todaysStake;
+   #sleep 5s;
+   #everyDayResult[((iteration))]="$stake";
+   #sleep 5s;
 done
-echo "Total amount after 20 days are: " $stake;
+#echo "Gambler Stake : " $stake;
+#echo ${everyDayResult[@]};
+echo "Win for the days: " ${winForTheDay[@]};
+echo ${!winForTheDay[@]};
+
+echo "Lose for the days: " ${loseForTheDay[@]};
+echo ${!loseForTheDay[@]};
+echo "Total amount after 2o days are: " $stake;
+
