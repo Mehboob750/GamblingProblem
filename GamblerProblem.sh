@@ -52,4 +52,3 @@ echo ${!winForTheDay[@]};
 echo "Lose for the days: " ${loseForTheDay[@]};
 echo ${!loseForTheDay[@]};
 echo "Total amount after 2o days are: " $stake;
-
